@@ -1,4 +1,4 @@
-import com.google.common.base.Joiner;
+
 import java.util.*;
 import java.io.*;
 import java.util.Scanner;
@@ -22,8 +22,8 @@ public class Trainer
 
     public String lineRepresentation()
     {
-        String arr[] = {trainerId, name, email, speciality, phoneNumber};
-        String trainerData = Joiner.on(",").join(arr);
+        List<String> arr= Arrays.asList(trainerId, name, email, speciality, phoneNumber);
+        String trainerData = String.join(",",arr);
         return trainerData;
     }
 
@@ -31,7 +31,7 @@ public class Trainer
         return trainerId;
     }
 
-    public static void saveTrainerToFile(Trainer trainer) throws IOException {
+    public void saveTrainerToFile(@org.jetbrains.annotations.NotNull Trainer trainer) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Trainers.txt", true))) {
             writer.write(trainer.lineRepresentation());
             writer.newLine();
