@@ -1,3 +1,7 @@
+import java.util.*;
+import java.io.*;
+import java.util.Scanner;
+
 public class TrainerDatabase{
     private ArrayList<Trainer> records;
     private String filename;
@@ -61,11 +65,19 @@ public class TrainerDatabase{
         return null;
     }
 
-   public void insertRecord(Trainer record){
-        if(contains(record.getSearchKey())){
+    public void insertRecord(Trainer record) {
+        if (!contains(record.getSearchKey())) {
             records.add(record);
+            try {
+                saveToFile(); // Overwrite the file with updated records
+            } catch (IOException e) {
+                System.out.println("Error saving records to file.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Record already exists: " + record.getSearchKey());
         }
-   }
+    }
 
    public void deleteRecord(String key){
        Iterator<Trainer> it = records.iterator();
@@ -82,9 +94,9 @@ public class TrainerDatabase{
        }
    }
 
-    public static void saveToFile(Trainer trainer) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
-            for(Trainer record : records){
+    public void saveToFile() throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (Trainer record : records) {
                 writer.write(record.lineRepresentation());
                 writer.newLine();
             }
