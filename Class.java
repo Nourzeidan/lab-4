@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Class extends Person{
+public class Class{
 
     private String classId;
     private String className;
@@ -25,7 +25,7 @@ public class Class extends Person{
         return availableSeats;
     }
 
-    @Override
+
     public String lineRepresentation()
     {
         String durationS = Integer.toString(duration);
@@ -34,7 +34,7 @@ public class Class extends Person{
         return String.join(",",arr);
 
     }
-    @Override
+
     public String getSearchKey() {
         return classId;
     }
