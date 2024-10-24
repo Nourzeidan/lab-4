@@ -2,33 +2,14 @@ import java.util.*;
 import java.io.*;
 import java.util.Scanner;
 
-public class TrainerDatabase{
-    private ArrayList<Trainer> records;
-    private String filename;
+public class TrainerDatabase extends Database<Trainer> {
 
     public TrainerDatabase(String filename){
-        this.filename = filename;
-        this.records = new ArrayList<>();
+       super(filename);
     }
 
-    public void readFromFile(){
-        try {
-            File myObj = new File(filename);
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String line = myReader.nextLine();
-                Trainer trainer = createRecordFrom(line);
-                if(trainer!=null){
-                    records.add(trainer);
-                }
-                //System.out.println(line);
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }}
 
+    @Override
     public Trainer createRecordFrom(String line){
         String[] tokens = line.split(",");
         if(tokens.length == 5){
@@ -43,65 +24,18 @@ public class TrainerDatabase{
 
     }
 
-    public ArrayList<Trainer> returnAllRecords(){
-        return records;
+    @Override
+    protected String getSearchKey(Trainer record) {
+        return record.getSearchKey();
     }
 
-    public boolean contains(String key){
-        for( Trainer record : records){
-            if(record.getSearchKey().equals(key)){
-                return true;
-            }
-        }
-        return false;
+    @Override
+    protected String lineRepresentation(Trainer record) {
+        return record.lineRepresentation();
     }
 
-    public Trainer getRecord(String key){
-        for( Trainer record : records){
-            if(record.getSearchKey().equals(key)){
-                return record;
-            }
-        }
-        return null;
-    }
 
-    public void insertRecord(Trainer record) {
-        if (!contains(record.getSearchKey())) {
-            records.add(record);
-            try {
-                saveToFile(); // Overwrite the file with updated records
-            } catch (IOException e) {
-                System.out.println("Error saving records to file.");
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Record already exists: " + record.getSearchKey());
-        }
-    }
 
-   public void deleteRecord(String key){
-       Iterator<Trainer> it = records.iterator();
-       //int i = 0;
-       while(it.hasNext())
-       {
-           Trainer record = it.next();
-           if(record.getSearchKey().equals(key)){
-               it.remove();
-               //records(i).remove();
-               break;
-           }
-           //i++;
-       }
-   }
-
-    public void saveToFile() throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            for (Trainer record : records) {
-                writer.write(record.lineRepresentation());
-                writer.newLine();
-            }
-        }
-    }
 
 }
 
