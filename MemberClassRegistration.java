@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class MemberClassRegistration extends Person {
+public class MemberClassRegistration {
     private String memberID;
     private String classID;
     private String status;
@@ -28,12 +28,12 @@ public class MemberClassRegistration extends Person {
         System.out.println("Status set to " + status);
     }
 
-    @Override
+
     public String getSearchKey() {
         return memberID+classID;
     }
 
-    @Override
+
     public String lineRepresentation () {
         String line = String.join(",",memberID,classID,registrationDate.toString(),status);
         //System.out.println(line);
