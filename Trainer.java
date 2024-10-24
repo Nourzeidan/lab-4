@@ -1,8 +1,8 @@
 
 import java.util.*;
 import java.io.*;
-import java.util.Scanner;
-public class Trainer
+
+public class Trainer extends Person
 {
 
     private String trainerId;
@@ -20,23 +20,20 @@ public class Trainer
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
     public String lineRepresentation()
     {
         List<String> arr= Arrays.asList(trainerId, name, email, speciality, phoneNumber);
-        String trainerData = String.join(",",arr);
-        return trainerData;
+        return String.join(",",arr);
+
     }
 
+    @Override
     public String getSearchKey(){
         return trainerId;
     }
 
-    public void saveTrainerToFile(@org.jetbrains.annotations.NotNull Trainer trainer) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Trainers.txt", true))) {
-            writer.write(trainer.lineRepresentation());
-            writer.newLine();
-        }
-    }
+
 
 
 }
