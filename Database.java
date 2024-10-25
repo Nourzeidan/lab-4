@@ -11,22 +11,30 @@ abstract class Database<base> {
         this.records = new ArrayList<>();
     }
 
-    public void readFromFile() {
+    public void readFromFile() throws IOException {
+        File file = new File(filename);
         try {
-            File file = new File(filename);
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                base record = createRecordFrom(line);
-                if (record != null) {
-                    records.add(record);
-                }
+            //File file = new File(filename);
+            if (!file.exists()) {
+                file.createNewFile();
+                System.out.println("File " + filename + " created");
             }
-            scanner.close();
+            try (Scanner scanner = new Scanner(file);) {
+
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    base record = createRecordFrom(line);
+                    if (record != null) {
+                        records.add(record);
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error while accessing the file: " + e.getMessage());
+            }
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred while reading the file.");
-            e.printStackTrace();
+            file.createNewFile();
         }
+
     }
 
     protected abstract base createRecordFrom(String line);
