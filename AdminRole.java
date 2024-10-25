@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -5,8 +6,9 @@ public class AdminRole {
 
     private TrainerDatabase database;
 
-    public AdminRole(TrainerDatabase database) {
-        this.database = database;
+    public AdminRole() throws IOException {
+        this.database = new TrainerDatabase("Trainers.txt");
+        this.database.readFromFile();
     }
 
     public void addTrainer(String trainerId, String name, String email, String speciality, String phoneNumber) throws IOException {
