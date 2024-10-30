@@ -1,4 +1,4 @@
-public class Member extends Person {
+public class Member extends Person implements A{
 
     private String memberID;
     private String membershipType;
