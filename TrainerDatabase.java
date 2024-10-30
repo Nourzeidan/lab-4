@@ -1,7 +1,3 @@
-import java.util.*;
-import java.io.*;
-import java.util.Scanner;
-
 public class TrainerDatabase extends Database<Trainer> {
 
     public TrainerDatabase(String filename){
@@ -22,19 +18,5 @@ public class TrainerDatabase extends Database<Trainer> {
         }
 
     }
-
-    @Override
-    public String getSearchKey(Trainer record) {
-        return record.getSearchKey();
-    }
-
-    @Override
-    public String lineRepresentation(Trainer record) {
-        return record.lineRepresentation();
-    }
-
-
-
-
 }
 
