@@ -2,7 +2,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Trainer extends Person
+public class Trainer extends Person implements A
 {
 
     private String trainerId;
