@@ -1,9 +1,3 @@
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
-
 public class ClassDatabase extends Database<Class> {
     //private String filename;
     //private ArrayList<Class> records;
@@ -29,14 +23,5 @@ public class ClassDatabase extends Database<Class> {
 
     }
 
-
-    @Override
-    public  String getSearchKey(Class record) {
-        return record.getSearchKey();
-    }
-
-    @Override
-    public String lineRepresentation(Class record) {
-        return record.lineRepresentation();}
 }
 
