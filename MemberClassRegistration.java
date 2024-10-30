@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class MemberClassRegistration {
+public class MemberClassRegistration implements A{
     private String memberID;
     private String classID;
     private String status;
