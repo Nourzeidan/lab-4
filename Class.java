@@ -1,7 +1,6 @@
 import java.util.*;
 import java.io.*;
-
-public class Class{
+public class Class implements A{
 
     private String classId;
     private String className;
@@ -25,7 +24,7 @@ public class Class{
         return availableSeats;
     }
 
-
+    @Override
     public String lineRepresentation()
     {
         String durationS = Integer.toString(duration);
@@ -35,6 +34,7 @@ public class Class{
 
     }
 
+    @Override
     public String getSearchKey() {
         return classId;
     }
