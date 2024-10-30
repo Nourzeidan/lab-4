@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,30 +16,27 @@ public class ClassDatabase extends Database<Class> {
     }
 
     @Override
-    public Class createRecordFrom(String line){
+    public Class createRecordFrom(String line) {
         String[] tokens = line.split(",");
-        if(tokens.length == 5){
-            Class classes = new Class(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
-            return classes;
+        if (tokens.length == 5) {
+            return (Class) new Class(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
 
             //records.add(trainer);
-        }
-        else {
+        } else {
             System.out.println("Error: invalid line");
             return null;
         }
 
     }
 
+
     @Override
-    protected String getSearchKey(Class record) {
+    public  String getSearchKey(Class record) {
         return record.getSearchKey();
     }
 
     @Override
-    protected String lineRepresentation(Class record) {
-        return record.lineRepresentation();
-    }
-
-
+    public String lineRepresentation(Class record) {
+        return record.lineRepresentation();}
 }
+
