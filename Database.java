@@ -39,7 +39,7 @@ abstract class Database<base extends A>{
 
     public boolean contains(String key) {
         for (base record : records) {
-            if (getSearchKey(record).equals(key)) {
+            if (record.getSearchKey().equals(key)) {
                 return true;
             }
         }
@@ -48,7 +48,7 @@ abstract class Database<base extends A>{
 
     public base getRecord(String key) {
         for (base record : records) {
-            if (getSearchKey(record).equals(key)) {
+            if (record.getSearchKey().equals(key)) {
                 return record;
             }
         }
@@ -56,18 +56,18 @@ abstract class Database<base extends A>{
     }
 
     public void insertRecord(base record) throws IOException {
-        if (!contains(getSearchKey(record))) {
+        if (!contains(record.getSearchKey())) {
             records.add(record);
             saveToFile();
         } else {
-            System.out.println("Record already exists: " + getSearchKey(record));
+            System.out.println("Record already exists: " + record.getSearchKey());
         }
     }
 
     public void deleteRecord(String key) throws IOException {
         base record = getRecord(key);
         if (record != null) {
-            System.out.println("Record deleted with ID: " + getSearchKey(record));
+            System.out.println("Record deleted with ID: " + record.getSearchKey());
             records.remove(record);
             saveToFile();
         }
@@ -76,14 +76,11 @@ abstract class Database<base extends A>{
     public void saveToFile() throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, false))) {
             for (base record : records) {
-                writer.write(lineRepresentation(record));
+                writer.write(record.lineRepresentation());
                 writer.newLine();
             }
             writer.close();
         }
     }
-
-   protected abstract String getSearchKey(base record);
-  protected abstract String lineRepresentation(base record);
 
 }
