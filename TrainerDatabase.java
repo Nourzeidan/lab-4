@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class TrainerDatabase extends Database<Trainer> {
 
     public TrainerDatabase(String filename){
-       super(filename);
+        super(filename);
     }
 
 
@@ -13,8 +13,7 @@ public class TrainerDatabase extends Database<Trainer> {
     public Trainer createRecordFrom(String line){
         String[] tokens = line.split(",");
         if(tokens.length == 5){
-            Trainer trainer = new Trainer(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
-            return trainer;
+            return (Trainer) new Trainer(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
             //records.add(trainer);
         }
         else {
@@ -25,12 +24,12 @@ public class TrainerDatabase extends Database<Trainer> {
     }
 
     @Override
-    protected String getSearchKey(Trainer record) {
+    public String getSearchKey(Trainer record) {
         return record.getSearchKey();
     }
 
     @Override
-    protected String lineRepresentation(Trainer record) {
+    public String lineRepresentation(Trainer record) {
         return record.lineRepresentation();
     }
 
